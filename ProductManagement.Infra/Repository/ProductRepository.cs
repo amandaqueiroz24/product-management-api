@@ -18,7 +18,7 @@ namespace ProductManagement.Infra.Repository
                 ?? throw new InvalidOperationException("Connection string não encontrada");
         }
 
-        public async Task<int> InsertAsync(CreateProductRequest createProduct)
+        public async Task<int> InsertAsync(Product product)
         {
             const string sql = """
             INSERT INTO product (nome, url, valor)
@@ -28,7 +28,7 @@ namespace ProductManagement.Infra.Repository
 
             using IDbConnection connection = new NpgsqlConnection(_connectionString);
 
-            var id = await connection.ExecuteScalarAsync<int>(sql, createProduct);
+            var id = await connection.ExecuteScalarAsync<int>(sql, product);
             return id;
         }
     }

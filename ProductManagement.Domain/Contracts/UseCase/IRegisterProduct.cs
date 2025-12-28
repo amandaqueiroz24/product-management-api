@@ -10,6 +10,6 @@ namespace ProductManagement.Domain.Contracts.UseCase
 {
     public interface IRegisterProduct
     {
-        bool IsRegistered(CreateProductRequest createProduct);
+        Task<int> ExecuteAsync(CreateProductRequest createProduct);
     }
 }

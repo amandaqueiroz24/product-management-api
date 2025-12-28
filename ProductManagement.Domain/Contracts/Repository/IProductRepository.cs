@@ -1,5 +1,4 @@
-﻿using ProductManagement.Domain.Dto;
-using ProductManagement.Domain.Model;
+﻿using ProductManagement.Domain.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +9,6 @@ namespace ProductManagement.Domain.Contracts.Repository
 {
     public interface IProductRepository
     {
-        Task<int> InsertAsync(CreateProductRequest createProduct);
+        Task<int> InsertAsync(Product product);
     }
 }

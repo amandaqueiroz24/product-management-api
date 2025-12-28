@@ -19,14 +19,23 @@ namespace ProductManagement.API.Controller
 
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        public IActionResult PostTransacao([FromBody] CreateProductRequest createProduct)
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> PostTransacao([FromBody] CreateProductRequest createProduct)
         {
-            if (registerProduct.IsRegistered(createProduct))
-                return StatusCode(StatusCodes.Status201Created);
-            else
-                return StatusCode(StatusCodes.Status400BadRequest);
+            try
+            {
+                var productId = await registerProduct.ExecuteAsync(createProduct);
+                return Created($"/api/v1/product/{productId}", new { id = productId });
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Ocorreu um erro interno." });
+            }
         }
     }
 }

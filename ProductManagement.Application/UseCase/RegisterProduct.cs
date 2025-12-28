@@ -19,14 +19,22 @@ namespace ProductManagement.Application.UseCase
             this.productRepository = productRepository;
         }
 
-        public bool IsRegistered(CreateProductRequest createProduct)
+        public async Task<int> ExecuteAsync(CreateProductRequest createProductRequest)
         {
-            if (createProduct != null)
+            if (createProductRequest == null)
             {
-                if(productRepository.InsertAsync(createProduct) != null)
-                    return true;
+                throw new ArgumentNullException(nameof(createProductRequest));
             }
-            return false;
+
+            var product = new Product(
+                createProductRequest.Nome,
+                createProductRequest.Url,
+                createProductRequest.Valor
+            );
+
+            var productId = await productRepository.InsertAsync(product);
+
+            return productId;
         }
     }
 }
