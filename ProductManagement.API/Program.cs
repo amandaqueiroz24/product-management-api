@@ -1,8 +1,14 @@
+using ProductManagement.Application.UseCase;
+using ProductManagement.Domain.Contracts.Repository;
+using ProductManagement.Domain.Contracts.UseCase;
+using ProductManagement.Infra.Repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // ===== Dependency Injection =====
-builder.Services.AddSingleton<IPostTransacao, PostTransacao>();
-builder.Services.AddSingleton<ITransacaoService, TransacaoService>();
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IRegisterProduct, RegisterProduct>();
+
 
 
 // ===== Controllers =====
