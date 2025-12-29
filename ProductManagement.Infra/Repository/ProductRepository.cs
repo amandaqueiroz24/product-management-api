@@ -21,8 +21,8 @@ namespace ProductManagement.Infra.Repository
         public async Task<int> InsertAsync(Product product)
         {
             const string sql = """
-            INSERT INTO product (nome, url, valor)
-            VALUES (@Nome, @Url, @Valor)
+            INSERT INTO product (name, url, price, active)
+            VALUES (@Name, @Url, @Price, @Active)
             RETURNING id;
             """;
 

@@ -8,8 +8,8 @@ namespace ProductManagement.Domain.Dto
 {
     public class CreateProductRequest
     {
-        public string Nome { get; set; }
+        public string Name { get; set; }
         public string Url { get; set; }
-        public decimal Valor { get; set; }
+        public decimal Price { get; set; }
     }
 }

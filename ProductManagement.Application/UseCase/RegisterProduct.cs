@@ -27,9 +27,11 @@ namespace ProductManagement.Application.UseCase
             }
 
             var product = new Product(
-                createProductRequest.Nome,
+                createProductRequest.Name,
                 createProductRequest.Url,
-                createProductRequest.Valor
+                createProductRequest.Price,
+                "S"
+
             );
 
             var productId = await productRepository.InsertAsync(product);

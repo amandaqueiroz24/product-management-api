@@ -9,24 +9,25 @@ namespace ProductManagement.Domain.Model
     public class Product
     {
         public int Id { get; private set; }
-        public string Nome { get; private set; }
+        public string Name { get; private set; }
         public string? Url { get; private set; }
-        public decimal Valor { get; private set; }
+        public decimal Price { get; private set; }
+        public string Active { get; private set; }
 
-        public Product(string nome, string? url, decimal valor)
+        public Product(string name, string? url, decimal price, string active)
         {
-            if (string.IsNullOrEmpty(nome))
-                throw new ArgumentException("O nome do produto não pode ser nulo ou vazio.", nameof(nome));
+            if (string.IsNullOrEmpty(name))
+                throw new ArgumentException("O nome do produto não pode ser nulo ou vazio.", nameof(name));
 
-            if (valor < 0)
-                throw new ArgumentException("O valor do produto não pode ser negativo.", nameof(valor));
+            if (price < 0)
+                throw new ArgumentException("O valor do produto não pode ser negativo.", nameof(price));
 
-            Nome = nome;
+            Name = name;
             Url = url;
-            Valor = valor;
+            Price = price;
+            Active = active;
         }
 
-        // Construtor privado para uso do Dapper/EF Core
         private Product() { }
 
         public void SetId(int id)
